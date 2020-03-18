@@ -70,7 +70,7 @@ REVIEW_COMMENT
 ```
 This README is missing documentation of your endpoints. Below is an example for your endpoint to get all categories. Please use it as a reference for creating your documentation and resubmit your code. 
 
-Endpoints
+##Categories
 GET '/categories'
 GET ...
 POST ...
@@ -86,6 +86,68 @@ GET '/categories'
 '4' : "History",
 '5' : "Entertainment",
 '6' : "Sports"}
+
+##Questions
+GET '/questions'
+GET ...
+POST '/questions'
+DELETE '/questions/question_id'
+
+GET '/questions'
+- Fetches a list of questions, paginated with questions per page
+- Request Arguments: page (default=1)
+- Returns:
+{
+    categories: {}
+    questions: {}
+    total_questions: {}
+    current_category: None
+    success: True
+}
+
+POST '/questions'
+- Creates a question
+- Request Arguments: question, answer, difficulty, category
+- Returns:
+{
+    success: True
+    message: message
+}
+
+DELETE '/questions/question_id'
+- Delete the question with question_id
+- Request Arguments: question_id
+- Returns:
+{
+    success: True
+    message: message
+}
+
+##Searches
+GET '/categories/category_id/questions'
+GET ...
+POST '/questions/stringsearch'
+DELETE ...
+
+GET '/categories/category_id/questions'
+- Searches questions by category_id
+- Request Arguments: category_id
+- Returns:
+{
+    success: True
+    questions: {}
+    total_questions: {}
+}
+
+POST '/questions/stringsearch'
+- Searches questions by string
+- Request Arguments: searchTerm
+- Returns:
+{
+    success: True
+    questions: {}
+    total_questions: {}
+}
 
 ```
 
