@@ -31,13 +31,43 @@ class TriviaTestCase(unittest.TestCase):
 
 
     def test_get_categories(self):
-        response = self.client.get('/categories')
+        response = self.client().get('/categories')
+        self.assertEqual(response.status_code, 200)
+    
+    def test_post_categories(self):    
+        # fail post request
+        response = self.client().post('/categories')
+        self.assertEqual(response.status_code, 405)
+
+    def test_get_questions(self):
+        response = self.client().get('/questions')
         self.assertEqual(response.status_code, 200)
 
-    """
-    TODO
-    Write at least one test for each test for successful operation and for expected errors.
-    """
+    def test_fail_post_questions(self):
+        # fail post with missing json
+        response = self.client().post('/questions')
+        self.assertEqual(response.status_code, 417)
+    
+    def test_post_question(self):
+        q = {
+            'question': 'Question',
+            'answer': 'Answer',
+            'difficulty': '1',
+            'category': '1'
+        }
+
+        response = self.client().post('/questions', json=q)
+        self.assertEqual(response.status_code, 200)
+
+    def test_fail_delete_question(self):
+        response = self.client().delete('/questions/1000')
+        self.assertEqual(response.status_code, 416)
+    
+    def test_delete_question(self):
+        last_question = self.client().get('/questions').json['questions'][-1]['id']
+        response = self.client().delete(f'/questions/{last_question}')
+        self.assertEqual(response.status_code, 200)
+
 
 
 # Make the tests conveniently executable
